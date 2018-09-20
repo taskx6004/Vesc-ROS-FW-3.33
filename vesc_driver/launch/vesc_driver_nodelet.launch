@@ -13,7 +13,7 @@
   <arg name="num_worker_threads" default="4" />
 
   <!-- VESC driver parameters -->
-  <arg name="port" default="/dev/ttyUSB0" />
+  <arg name="port" default="/dev/ttyACM0" />
 
   <!-- Parameter for enabling rotor position publishing
        Possible values are "inductance", "observer", "encoder", "pid_pos", "pid_pos_error", "encoder_observer_error" -->
