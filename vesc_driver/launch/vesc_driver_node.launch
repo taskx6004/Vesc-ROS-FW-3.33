@@ -19,9 +19,9 @@
   <node pkg="vesc_driver" type="vesc_driver_node" name="$(arg node_name)"
         output="screen" launch-prefix="$(arg launch_prefix)" >
     <param name="port" value="$(arg port)" />
+     <param name="tacho_pulses_per_revolution" value="16384" />
+      <param name="motor_poles" value="20" />
     <param name="rotor_position_source" value="$(arg rotor_position_source)" />
-    <param name="motor_poles" value="$(20)" />
-    <param name="tacho_pulses_per_revolution" value="$(16384)" />
   </node>
 
 </launch>
