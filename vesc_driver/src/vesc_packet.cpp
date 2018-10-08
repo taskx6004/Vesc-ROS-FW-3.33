@@ -350,11 +350,11 @@ VescPacketSetRPM::VescPacketSetRPM(double rpm) :
 /*------------------------------------------------------------------------------------------------*/
 
 VescPacketSetPos::VescPacketSetPos(double pos) :
-  VescPacket("SetPos", 5, COMM_SET_POS)
+  VescPacket("SetPos", 5, COMM_SET_POS_CUMULATIVE)
 {
   /** @todo range check pos */
 
-  int32_t v = static_cast<int32_t>(pos * 1000000.0);
+  int32_t v = static_cast<int32_t>(pos * 100000.0);
 
   *(payload_.first + 1) = static_cast<uint8_t>((static_cast<uint32_t>(v) >> 24) & 0xFF);
   *(payload_.first + 2) = static_cast<uint8_t>((static_cast<uint32_t>(v) >> 16) & 0xFF);
