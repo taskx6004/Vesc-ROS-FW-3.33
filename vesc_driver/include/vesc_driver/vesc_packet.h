@@ -186,7 +186,7 @@ public:
 class VescPacketSetPos : public VescPacket
 {
 public:
-  VescPacketSetPos(double pos);
+  VescPacketSetPos(double pos, double speed);
 
   //  double pos() const;
 };

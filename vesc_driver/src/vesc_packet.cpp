@@ -349,7 +349,7 @@ VescPacketSetRPM::VescPacketSetRPM(double rpm) :
 
 /*------------------------------------------------------------------------------------------------*/
 
-VescPacketSetPos::VescPacketSetPos(double pos) :
+VescPacketSetPos::VescPacketSetPos(double pos, double speed) :
   VescPacket("SetPos", 5, COMM_SET_POS_CUMULATIVE)
 {
   /** @todo range check pos */
@@ -360,6 +360,13 @@ VescPacketSetPos::VescPacketSetPos(double pos) :
   *(payload_.first + 2) = static_cast<uint8_t>((static_cast<uint32_t>(v) >> 16) & 0xFF);
   *(payload_.first + 3) = static_cast<uint8_t>((static_cast<uint32_t>(v) >> 8) & 0xFF);
   *(payload_.first + 4) = static_cast<uint8_t>(static_cast<uint32_t>(v) & 0xFF);
+  
+  int32_t w = static_cast<int32_t>(speed);
+
+  *(payload_.first + 5) = static_cast<uint8_t>((static_cast<uint32_t>(w) >> 24) & 0xFF);
+  *(payload_.first + 6) = static_cast<uint8_t>((static_cast<uint32_t>(w) >> 16) & 0xFF);
+  *(payload_.first + 7) = static_cast<uint8_t>((static_cast<uint32_t>(w) >> 8) & 0xFF);
+  *(payload_.first + 8) = static_cast<uint8_t>(static_cast<uint32_t>(w) & 0xFF);  
 
   VescFrame::CRC crc_calc;
   crc_calc.process_bytes(&(*payload_.first), boost::distance(payload_));

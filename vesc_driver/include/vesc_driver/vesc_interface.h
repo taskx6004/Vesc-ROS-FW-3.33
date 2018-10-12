@@ -90,7 +90,7 @@ public:
   void setCurrent(double current);
   void setBrake(double brake);
   void setSpeed(double speed);
-  void setPosition(double position);
+  void setPosition(double position, double speed);
   void setServo(double servo);
   void setDetect(disp_pos_mode mode);
 

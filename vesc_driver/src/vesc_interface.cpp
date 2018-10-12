@@ -232,9 +232,9 @@ void VescInterface::setSpeed(double speed)
   send(VescPacketSetRPM(speed));
 }
 
-void VescInterface::setPosition(double position)
+void VescInterface::setPosition(double position, double speed)
 {
-  send(VescPacketSetPos(position));
+  send(VescPacketSetPos(position, speed));
 }
 
 void VescInterface::setServo(double servo)
