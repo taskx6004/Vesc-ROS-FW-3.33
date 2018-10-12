@@ -230,7 +230,7 @@ void VescDriver::brakeCallback(const std_msgs::Float64::ConstPtr& brake)
  */
 void VescDriver::speedCallback(const std_msgs::Float64::ConstPtr& speed)
 {
-  set_speed = speed;
+  set_speed = speed->data;
   if (driver_mode_ = MODE_OPERATING) {
     vesc_.setSpeed(speed_limit_.clip(speed->data));
   }
