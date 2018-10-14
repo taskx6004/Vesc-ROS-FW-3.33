@@ -14,7 +14,6 @@ float64 temperature_pcb      # temperature of printed circuit board (degrees Cel
 float64 current_motor        # motor current (ampere)
 float64 current_input        # input current (ampere)
 float64 speed                # motor electrical speed (revolutions per minute) 
-float64 setspeed             # motor electrical speed for position control (revolutions per minute) 
 float64 duty_cycle           # duty cycle (0 to 1)
 float64 charge_drawn         # electric charge drawn from input (ampere-hour)
 float64 charge_regen         # electric charge regenerated to input (ampere-hour)
