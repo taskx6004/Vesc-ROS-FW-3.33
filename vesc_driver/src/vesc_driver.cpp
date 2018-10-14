@@ -21,7 +21,7 @@ VescDriver::VescDriver(ros::NodeHandle nh,
   duty_cycle_limit_(private_nh, "duty_cycle", -1.0, 1.0), current_limit_(private_nh, "current"),
   brake_limit_(private_nh, "brake"), speed_limit_(private_nh, "speed"),
   position_limit_(private_nh, "position"), servo_limit_(private_nh, "servo", 0.0, 1.0),
-  driver_mode_(MODE_INITIALIZING), fw_version_major_(-1), fw_version_minor_(-1)
+  driver_mode_(MODE_INITIALIZING), fw_version_major_(-1), fw_version_minor_(-1), set_speed(0)
 {
   // get vesc serial port address
   std::string port;
@@ -54,6 +54,7 @@ VescDriver::VescDriver(ros::NodeHandle nh,
   current_sub_ = nh.subscribe("commands/motor/current", 10, &VescDriver::currentCallback, this);
   brake_sub_ = nh.subscribe("commands/motor/brake", 10, &VescDriver::brakeCallback, this);
   speed_sub_ = nh.subscribe("commands/motor/speed", 10, &VescDriver::speedCallback, this);
+  set_speed_sub_ = nh.subscribe("commands/motor/setspeed", 10, &VescDriver::setSpeedCallback, this);
   position_sub_ = nh.subscribe("commands/motor/position", 10, &VescDriver::positionCallback, this);
   servo_sub_ = nh.subscribe("commands/servo/position", 10, &VescDriver::servoCallback, this);
 
@@ -230,10 +231,14 @@ void VescDriver::brakeCallback(const std_msgs::Float64::ConstPtr& brake)
  */
 void VescDriver::speedCallback(const std_msgs::Float64::ConstPtr& speed)
 {
-  set_speed = speed->data;
   if (driver_mode_ = MODE_OPERATING) {
     vesc_.setSpeed(speed_limit_.clip(speed->data));
   }
+}
+
+void VescDriver::setSpeedCallback(const std_msgs::Float64::ConstPtr& speed)
+{
+  set_speed = speed->data;  
 }
 
 /**

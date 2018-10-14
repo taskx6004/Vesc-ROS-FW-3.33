@@ -53,6 +53,7 @@ private:
   ros::Subscriber current_sub_;
   ros::Subscriber brake_sub_;
   ros::Subscriber speed_sub_;
+  ros::Subscriber set_speed_sub_;
   ros::Subscriber position_sub_;
   ros::Subscriber servo_sub_;
   ros::Publisher rotor_position_pub_;
@@ -76,6 +77,7 @@ private:
   void currentCallback(const std_msgs::Float64::ConstPtr& current);
   void brakeCallback(const std_msgs::Float64::ConstPtr& brake);
   void speedCallback(const std_msgs::Float64::ConstPtr& speed);
+  void setSpeedCallback(const std_msgs::Float64::ConstPtr& speed);
   void positionCallback(const std_msgs::Float64::ConstPtr& position);
   void servoCallback(const std_msgs::Float64::ConstPtr& servo);
 };
