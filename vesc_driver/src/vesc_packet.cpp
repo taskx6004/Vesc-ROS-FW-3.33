@@ -350,7 +350,7 @@ VescPacketSetRPM::VescPacketSetRPM(double rpm) :
 /*------------------------------------------------------------------------------------------------*/
 
 VescPacketSetPos::VescPacketSetPos(double pos, double speed) :
-  VescPacket("SetPos", 5, COMM_SET_POS_CUMULATIVE)
+  VescPacket("SetPos", 9, COMM_SET_POS_CUMULATIVE)
 {
   /** @todo range check pos */
 
