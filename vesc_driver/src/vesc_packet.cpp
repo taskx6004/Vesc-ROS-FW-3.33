@@ -416,7 +416,7 @@ VescPacketSetDetect::VescPacketSetDetect(uint8_t mode) :
 
 /*------------------------------------------------------------------------------------------------*/
 
-VescPacketSetDetect::VescPacketSetAlive() :
+VescPacketSetAlive::VescPacketSetAlive() :
   VescPacket("SetAlive", 1, COMM_ALIVE)
 {
   VescFrame::CRC crc_calc;
