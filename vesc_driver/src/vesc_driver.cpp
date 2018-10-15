@@ -132,6 +132,7 @@ void VescDriver::timerCallback(const ros::TimerEvent& event)
   else if (driver_mode_ == MODE_OPERATING) {
     // poll for vesc state (telemetry)
     vesc_.requestState();
+    vesc_.setAlive();
   }
   else {
     // unknown mode, how did that happen?
@@ -250,6 +251,7 @@ void VescDriver::positionCallback(const std_msgs::Float64::ConstPtr& position)
   if (driver_mode_ = MODE_OPERATING) {
     // ROS uses radians but VESC seems to use degrees. Convert to degrees.
     double position_deg = position_limit_.clip(position->data) * 180.0 / M_PI;
+    //ROS_INFO("VescDriver::positionCallback %.2f, %.2f", position_deg, set_speed);
     vesc_.setPosition(position_deg, set_speed);
   }
 }

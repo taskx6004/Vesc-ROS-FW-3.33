@@ -93,6 +93,7 @@ public:
   void setPosition(double position, double speed);
   void setServo(double servo);
   void setDetect(disp_pos_mode mode);
+  void setAlive();
 
 private:
   // Pimpl - hide serial port members from class users

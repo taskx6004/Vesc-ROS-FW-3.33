@@ -247,4 +247,10 @@ void VescInterface::setDetect(disp_pos_mode mode)
   send(VescPacketSetDetect(mode));
 }
 
+void VescInterface::setAlive()
+{
+  send(VescPacketSetAlive());
+}
+
+
 } // namespace vesc_driver

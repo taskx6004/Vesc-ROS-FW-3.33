@@ -9,8 +9,12 @@
 #include <boost/range/distance.hpp>
 #include <boost/range/end.hpp>
 
+#include <ros/ros.h>
+
 #include "vesc_driver/vesc_packet_factory.h"
 #include "vesc_driver/datatypes.h"
+
+
 
 namespace vesc_driver
 {
@@ -367,6 +371,8 @@ VescPacketSetPos::VescPacketSetPos(double pos, double speed) :
   *(payload_.first + 6) = static_cast<uint8_t>((static_cast<uint32_t>(w) >> 16) & 0xFF);
   *(payload_.first + 7) = static_cast<uint8_t>((static_cast<uint32_t>(w) >> 8) & 0xFF);
   *(payload_.first + 8) = static_cast<uint8_t>(static_cast<uint32_t>(w) & 0xFF);  
+  
+  //ROS_INFO("VescPacketSetPos::VescPacketSetPos %d, %d", v, w);
 
   VescFrame::CRC crc_calc;
   crc_calc.process_bytes(&(*payload_.first), boost::distance(payload_));
@@ -397,7 +403,7 @@ VescPacketSetServoPos::VescPacketSetServoPos(double servo_pos) :
 /*------------------------------------------------------------------------------------------------*/
 
 VescPacketSetDetect::VescPacketSetDetect(uint8_t mode) :
-  VescPacket("SetDetect", 3, COMM_SET_DETECT)
+  VescPacket("SetDetect", 2, COMM_SET_DETECT)
 {
   *(payload_.first + 1) = mode;
 
@@ -407,5 +413,18 @@ VescPacketSetDetect::VescPacketSetDetect(uint8_t mode) :
   *(frame_->end() - 3) = static_cast<uint8_t>(crc >> 8);
   *(frame_->end() - 2) = static_cast<uint8_t>(crc & 0xFF);
 }
+
+/*------------------------------------------------------------------------------------------------*/
+
+VescPacketSetDetect::VescPacketSetAlive(uint8_t mode) :
+  VescPacket("SetAlive", 1, COMM_ALIVE)
+{
+  VescFrame::CRC crc_calc;
+  crc_calc.process_bytes(&(*payload_.first), boost::distance(payload_));
+  uint16_t crc = crc_calc.checksum();
+  *(frame_->end() - 3) = static_cast<uint8_t>(crc >> 8);
+  *(frame_->end() - 2) = static_cast<uint8_t>(crc & 0xFF);
+}
+
 
 } // namespace vesc_driver
