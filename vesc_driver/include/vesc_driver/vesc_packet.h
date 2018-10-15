@@ -106,6 +106,7 @@ public:
 
 };
 
+
 /*------------------------------------------------------------------------------------------------*/
 
 class VescPacketValues : public VescPacket
@@ -199,6 +200,15 @@ public:
   VescPacketSetServoPos(double servo_pos);
 
   //  double servo_pos() const;
+};
+
+/*------------------------------------------------------------------------------------------------*/
+
+class VescPacketSetAlive : public VescPacket
+{
+public:
+  VescPacketSetAlive();
+
 };
 
 /*------------------------------------------------------------------------------------------------*/
